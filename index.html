@@ -1,34 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body style="background-color: #222; color: #ddd">
-    
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
 
-    <p style="color: rgb(15, 231, 15)">Um</p>
-    <p style="color: rgba(19, 221, 36, 0.502)">Dois</p>
-    <p style="color: #0b70f5">Três</p>
+<body style="background-color: #222; color: #ddd">
 
-    <h1>Listas</h1>
-    <ul>
-      <li>Item#1</li>
-      <li>Item#1</li>
-      <li>Item#1</li>
-    </ul>
 
-    <ol>
-      <li>Item#1</li>
-      <li>Item#1</li>
-      <li>Item#1</li>
-    </ol>
+  <p style="color: rgb(15, 231, 15)">Um</p>
+  <p style="color: rgba(19, 221, 36, 0.502)">Dois</p>
+  <p style="color: #0b70f5">Três</p>
 
-    <h1>Links</h1>
-    <a href="https://google.com" target="_blank">Google</a>
+  <h1>Listas</h1>
+  <ul>
+    <li>Item#1</li>
+    <li>Item#1</li>
+    <li>Item#1</li>
+  </ul>
+
+  <ol>
+    <li>Item#1</li>
+    <li>Item#1</li>
+    <li>Item#1</li>
+  </ol>
+
+  <h1>Links</h1>
+  <a href="https://google.com" target="_blank">Google</a>
+  <br>
+  <a href="cookieRecipe.html">Ir para a pagina 2</a>
+
+  <div class="inputs">
+    <h1 style="color: #0077ff">Inputs</h1>
+
+    <label for="texto">Digite um texto: </label>
+    <input id="texto" type="text">
     <br>
-    <a href="pageTwo.html">Ir para a pagina 2</a>
-  </body>
+    <label for="numero">Digite um número</label>
+    <input type="number" id="numero">
+    <br>
+    <label for="cor">Escolha uma cor</label>
+    <input type="color" id="cor">
+    <br>
+    <label for="data">Escolha uma data</label>
+    <input type="date" id="data">
+    <br>
+    <input type="checkbox" id="check">
+    <label for="check">Frio</label>
+    <br>
+    <br>
+
+    <input type="radio" id="1" name="temp" checked>
+    <label for="2">Frio</label>
+    <br>
+    <input type="radio" id="2" name="temp" disabled>
+    <label for="2">Quente</label>
+    <br>
+    <input type="radio" id="3" name="temp">
+    <label for="2">Normal</label>
+  </div>
+</body>
+
 </html>
