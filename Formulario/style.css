@@ -1,4 +1,41 @@
 body {
     background-color: #111;
     color: #ddd;
+    margin: 2rem;
+}
+
+input {
+    display: inline;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+.campo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+button {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #0050ff;
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+table {
+    margin-top: 5rem;
+}
+
+table, th, tr {
+    padding: 1rem;
+    border: 1px solid white;
+    border-collapse: collapse;
 }
