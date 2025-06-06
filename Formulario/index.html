@@ -4,6 +4,35 @@
 <head>
     <link rel="stylesheet" href="style.css">
     <title>Formulário</title>
+
+    <script>
+        function clicke() {
+            const tbody = document.querySelector("#table-body");
+            const nome = document.querySelector("#nome");
+            const idade = document.querySelector("#idade");
+            const estudante = document.querySelector("#op1");
+            const formado = document.querySelector("#op2");
+
+            let status;
+
+            if (estudante.checked) status = "Estudante";
+            else status = "Formado";
+
+            tbody.innerHTML +=  
+            `
+                <tr>
+                    <th>${nome.value}</th>
+                    <th>${idade.value}</th>
+                    <th>${status}</th>
+                </tr>
+            `
+
+            nome.value = "";
+            idade.value = "";
+            estudante.checked;
+            nome.focus();
+        }
+    </script>
 </head>
 
 <body>
@@ -26,7 +55,7 @@
             <label for="op2">Formado</label>
         </div>
 
-        <button>Adicionar</button>
+        <button onclick="clicke()">Adicionar</button>
     </div>
 
     <table>
@@ -38,7 +67,7 @@
             </tr>
         </thead>
 
-        <tbody>
+        <tbody id="table-body">
             <tr>
                 <th>Rafael</th>
                 <th>25</th>
