@@ -1,11 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Velha</title>
+
+    <style>
+        body {
+            margin: 4rem;
+            background-color: #202020;
+            color: #ddd;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #game {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        button {
+            font-size: 2rem;
+            padding: 1rem 2rem;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Jogo da velha</h1>
+    <div id="game"></div>
+
+    <script>
+        const jogadas = [
+            '', '', '',
+            '', '', '',
+            '', '', ''
+        ]
+
+        let jogadorVez = "X";
+        let totalJogadas = 0;
+        let vencedor;
+
+        function verificarJogadas(){
+
+        }
+
+        function fazerJogada(posicao){
+            jogadas[posicao] = jogadorVez;
+            totalJogadas++;
+
+            verificarJogadas();
+            
+            if (jogadorVez === "X") jogadorVez = "O";
+            else jogadorVez = "X";
+
+            desenhaBotoes();
+        }
+
+        function desenhaBotoes() {
+            const game = document.querySelector("#game");
+
+            game.innerHTML = "";
+
+            for (let i = 0; i < 9; i++){
+                game.innerHTML += `
+                    <button onClick="fazerJogada(${i})">${jogadas[i]}</button>
+                `
+            }
+        }
+
+        desenhaBotoes();
+    </script>
 </body>
+
 </html>
