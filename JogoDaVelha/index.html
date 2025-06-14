@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Velha</title>
-
+    
     <style>
         body {
             margin: 4rem;
@@ -36,29 +36,75 @@
 
     <script>
         const jogadas = [
-            '', '', '',
-            '', '', '',
-            '', '', ''
+            "", "", "",
+            "", "", "",
+            "", "", ""
         ]
 
         let jogadorVez = "X";
         let totalJogadas = 0;
-        let vencedor;
+        let vencedor = false;
 
-        function verificarJogadas(){
+        function verificarJogada(posicao1, posicao2, posicao3) {
+            if (
+                jogadas[posicao1] == "" ||
+                jogadas[posicao2] == "" ||
+                jogadas[posicao3] == ""
+            ) return false;
 
+            return (
+                jogadas[posicao1] == jogadas[posicao2] &&
+                jogadas[posicao2] == jogadas[posicao3]
+            );
         }
 
-        function fazerJogada(posicao){
-            jogadas[posicao] = jogadorVez;
+        function verificarGanhador() {
+            const possibilidades = [
+                // Linhas
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                // Colunas
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                // Diagonais
+                [0, 4, 8], [6, 4, 2]
+            ]
+
+            for (let i = 0; i < possibilidades.length; i++) {
+                const posicao1 = possibilidades[i][0];
+                const posicao2 = possibilidades[i][1];
+                const posicao3 = possibilidades[i][2];
+
+                const ganhou = verificarJogada(posicao1, posicao2, posicao3);
+
+                if (ganhou) return ganhou;
+            }
+
+            verificarVelha();
+        }
+
+        function verificarVelha() {
+            if (totalJogadas < 9 ) return;
+            window.alert("Velha");
+        }
+
+        function finalizarJogo(){
+            window.alert(`Vencedor: ${jogadorVez}`)
+        }
+
+        function trocarJogador(jogadorAtual) {
+            if (jogadorAtual === "X") jogadorVez = "O";
+            else jogadorVez = "X";
+        }
+
+        function fazerJogada(posicao) {
             totalJogadas++;
 
-            verificarJogadas();
-            
-            if (jogadorVez === "X") jogadorVez = "O";
-            else jogadorVez = "X";
-
+            jogadas[posicao] = jogadorVez;
             desenhaBotoes();
+
+            vencedor = verificarGanhador();
+            if (vencedor) finalizarJogo();
+
+            trocarJogador(jogadorVez);
         }
 
         function desenhaBotoes() {
@@ -66,7 +112,7 @@
 
             game.innerHTML = "";
 
-            for (let i = 0; i < 9; i++){
+            for (let i = 0; i < 9; i++) {
                 game.innerHTML += `
                     <button onClick="fazerJogada(${i})">${jogadas[i]}</button>
                 `
