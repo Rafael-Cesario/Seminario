@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vampire</title>
-</head>
-
-<body>
+<body style="background-color: black;">
+    <img src="Warrior_Red.png" alt="Warrior" hidden>
     <canvas></canvas>
-
     <script>
         const canvas = document.querySelector("canvas");
         const ctx = canvas.getContext("2d");
+        const imagem = document.querySelector("img");
 
         canvas.width = 1024;
         canvas.height = 720;
@@ -20,25 +14,70 @@
         let x = canvas.width / 2;
         let y = canvas.height / 2;
 
-        function animation() {
-            requestAnimationFrame(animation)
+        let frames = 0;
+        let colunaFrame = 0;
+        let linhaFrame = 1;
 
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "blue";
-            ctx.fillRect(x, y, 50, 50);
-
-            if ( y < canvas.height - 50) y += 10;
+        const toque = {
+            x: null,
+            y: null,
         }
 
-        canvas.addEventListener("keydown", (tecla) => {
-            console.log(tecla.code);
-            if (tecla.code == "keyA") x -= 10;
-            if (tecla.code == "keyD") x += 10;  
+        const player = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+        }
+
+        function animation() {
+            requestAnimationFrame(animation);
+
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (toque.x != null) {
+                ctx.fillStyle = "blue";
+                ctx.beginPath();
+                ctx.arc(toque.x, toque.y, 30, 0, Math.PI * 2);
+                ctx.fill();
+
+                const dx = toque.x - player.x;
+                const dy = toque.y - player.y;
+                const angulo = Math.atan2(dy, dx);
+
+                player.x += Math.cos(angulo);
+                player.y += Math.sin(angulo);
+            }
+
+            const alturaFrame = imagem.height / 8;
+            const larguraFrame = imagem.width / 6;
+
+            ctx.drawImage(
+                imagem, 
+                colunaFrame * larguraFrame, 
+                linhaFrame * alturaFrame, 
+                larguraFrame, 
+                alturaFrame, 
+                player.x, 
+                player.y, 
+                larguraFrame, 
+                alturaFrame
+            );
+
+            if (frames % 10 == 0) {
+                if (colunaFrame > 4) colunaFrame = 0;
+                else colunaFrame += 1;
+            }
+
+            frames++;
+        }
+
+        addEventListener('touchstart', (evento) => {
+            toque.x = evento.targetTouches[0].clientX;
+            toque.y = evento.targetTouches[0].clientY;
         })
 
         animation();
+
     </script>
 </body>
 
