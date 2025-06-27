@@ -76,6 +76,16 @@
             toque.y = evento.targetTouches[0].clientY;
         })
 
+        addEventListener('touchmove', (evento) => {
+            toque.x = evento.targetTouches[0].clientX;
+            toque.y = evento.targetTouches[0].clientY;
+        })
+
+        addEventListener('touchend', (evento) => {
+            toque.x = null;
+            toque.y = null;
+        })
+
         animation();
 
     </script>
