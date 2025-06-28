@@ -1,12 +1,16 @@
 <html>
 
 <body style="background-color: black;">
-    <img src="Warrior_Red.png" alt="Warrior" hidden>
+    <img src="Warrior_Red.png" id="warrior" alt="Warrior" hidden>
+    <img src="Torch_Blue.png" id="goblin" alt="goblin" hidden>
+
     <canvas></canvas>
+
     <script>
         const canvas = document.querySelector("canvas");
         const ctx = canvas.getContext("2d");
-        const imagem = document.querySelector("img");
+        const warriorImagem = document.querySelector("#warrior");
+        const globlinImagem = document.querySelector("#goblin");
 
         canvas.width = 1024;
         canvas.height = 720;
@@ -15,8 +19,6 @@
         let y = canvas.height / 2;
 
         let frames = 0;
-        let colunaFrame = 0;
-        let linhaFrame = 1;
 
         const toque = {
             x: null,
@@ -26,6 +28,16 @@
         const player = {
             x: canvas.width / 2,
             y: canvas.height / 2,
+            colunaFrame: 0,
+            linhaFrame: 1,
+            velocidade: 6
+        }
+
+        const goblin = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            colunaFrame: 0,
+            linhaFrame: 1,
             velocidade: 6
         }
 
@@ -49,24 +61,39 @@
                 player.y += Math.sin(angulo) * player.velocidade;
             }
 
-            const alturaFrame = imagem.height / 8;
-            const larguraFrame = imagem.width / 6;
+            const alturaFrame = warriorImagem.height / 8;
+            const larguraFrame = warriorImagem.width / 6;
 
             ctx.drawImage(
-                imagem,
-                colunaFrame * larguraFrame,
-                linhaFrame * alturaFrame,
+                warriorImagem,
+                player.colunaFrame * larguraFrame,
+                player.linhaFrame * alturaFrame,
                 larguraFrame,
                 alturaFrame,
-                player.x,
-                player.y,
+                player.x - larguraFrame / 2,
+                player.y - alturaFrame / 2,
                 larguraFrame,
                 alturaFrame
             );
 
+            ctx.drawImage(
+                globlinImagem,
+                goblin.colunaFrame * larguraFrame,
+                goblin.linhaFrame * alturaFrame,
+                larguraFrame,
+                alturaFrame,
+                goblin.x,
+                goblin.y,
+                larguraFrame,
+                alturaFrame
+            )
+
             if (frames % 10 == 0) {
-                if (colunaFrame > 4) colunaFrame = 0;
-                else colunaFrame += 1;
+                if (player.colunaFrame > 4) player.colunaFrame = 0;
+                else player.colunaFrame++;
+
+                if (goblin.colunaFrame > 4) goblin.colunaFrame = 0;
+                else goblin.colunaFrame++;
             }
 
             frames++;
