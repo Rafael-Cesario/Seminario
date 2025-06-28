@@ -26,6 +26,7 @@
         const player = {
             x: canvas.width / 2,
             y: canvas.height / 2,
+            velocidade: 6
         }
 
         function animation() {
@@ -44,22 +45,22 @@
                 const dy = toque.y - player.y;
                 const angulo = Math.atan2(dy, dx);
 
-                player.x += Math.cos(angulo);
-                player.y += Math.sin(angulo);
+                player.x += Math.cos(angulo) * player.velocidade;
+                player.y += Math.sin(angulo) * player.velocidade;
             }
 
             const alturaFrame = imagem.height / 8;
             const larguraFrame = imagem.width / 6;
 
             ctx.drawImage(
-                imagem, 
-                colunaFrame * larguraFrame, 
-                linhaFrame * alturaFrame, 
-                larguraFrame, 
-                alturaFrame, 
-                player.x, 
-                player.y, 
-                larguraFrame, 
+                imagem,
+                colunaFrame * larguraFrame,
+                linhaFrame * alturaFrame,
+                larguraFrame,
+                alturaFrame,
+                player.x,
+                player.y,
+                larguraFrame,
                 alturaFrame
             );
 
@@ -82,6 +83,25 @@
         })
 
         addEventListener('touchend', (evento) => {
+            toque.x = null;
+            toque.y = null;
+        })
+
+        let mouseApertado = false;
+        addEventListener('mousedown', (evento) => {
+            mouseApertado = true;
+            toque.x = evento.clientX;
+            toque.y = evento.clientY;
+        })
+
+        addEventListener('mousemove', (evento) => {
+            if (!mouseApertado) return;
+            toque.x = evento.clientX;
+            toque.y = evento.clientY;
+        })
+
+        addEventListener('mouseup', (evento) => {
+            mouseApertado = false;
             toque.x = null;
             toque.y = null;
         })
